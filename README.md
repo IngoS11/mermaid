@@ -2,7 +2,44 @@
 
 Let's go
 
+## Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    Customer ||--o{ Order : places
+    Order ||--o{ LineItem : contains
+    Customer {
+        String id
+        String name
+    }
+    Order {
+        String id
+        OrderStatus status
+    }
+    LineItem {
+        String code
+        String description
+        int quantity
+        int price
+    }
+```
+
+## Flowchart Sample
+
+```mermaid
+flowchart
+    S[Start] --> A[Enter your email];
+    A --> B{Existing User?};
+    B --> |No| C(Enter name);
+    B --> |Yes| E;
+    C --> D{Accept conditions?}
+    D -->|Yes| E(Send email with link)
+    D -->|No| A
+```
+
 ## Sequence Diagram Sample
+
+Some text in between the diagrams
 
 ```mermaid
 sequenceDiagram
@@ -23,15 +60,31 @@ sequenceDiagram
    deactivate Server
 ```
 
-## Flowchart Sample
+## Class Diagram Sample
 
 ```mermaid
-flowchart
-    S[Start] --> A[Enter your email];
-    A --> B{Existing User?};
-    B --> |No| C(Enter name);
-    B --> |Yes| E;
-    C --> D{Accept conditions?}
-    D -->|Yes| E(Send email with link)
-    D -->|No| A
+classDiagram
+   class Order {
+      +OrderStatus status
+   }
+   class OrderStatus {
+      <<enumeration>>
+      FAILED
+      PENDING
+      PAID
+   }
+   class PaymentProcessor {
+      <<interface>>
+      -String apiKey
+      connect(String url, JSON header)
+      +processPayment(Order order) OrderStatus
+   }
+   class Customer {
+      +String name
+   }
+   Customer <|-- PrivateCustomer
+   Customer <|-- BusinessCustomer
+   PaymentProcessor <|-- StripePaymentProcessor
+   PaymentProcessor <|-- PayPalPaymentProcessor
+   Order o-- Customer
 ```
