@@ -1,6 +1,6 @@
 # Mermaid tutorial
 
-Let's go
+The Mermaid Live Editor can be found at [mermaid.live](https://mermaid.live)
 
 ## Entity Relationship Diagram
 
